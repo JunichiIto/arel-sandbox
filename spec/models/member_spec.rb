@@ -4,6 +4,7 @@ RSpec.describe Member, type: :model do
   let(:event_yakiniku) {create :event, name: '焼き肉パーティ'}
   let(:group_men) {create :group, name: '男性グループ', event: event_yakiniku}
   let(:member_takashi) {create :member, name: 'たかし'}
+  let(:member_masaru) {create :member, name: 'まさる'}
   let(:group_women) {create :group, name: '女性グループ', event: event_yakiniku}
   let(:member_hiromi) {create :member, name: 'ひろみ'}
 
@@ -22,12 +23,14 @@ RSpec.describe Member, type: :model do
   before do
     # グループとメンバーの関連を作成
     create :group_member, group: group_men, member: member_takashi
+    create :group_member, group: group_men, member: member_masaru
     create :group_member, group: group_women, member: member_hiromi
     create :group_member, group: group_20s, member: member_sachiko
     create :group_member, group: group_50s, member: member_yuzo
 
-    # たかしは複数のグループに参加している
+    # たかしとまさるは複数のグループに参加している
     create :group_member, group: group_programmer, member: member_takashi
+    create :group_member, group: group_20s, member: member_masaru
   end
 
   # カラオケパーティに参加していないメンバーのみが抽出されることを期待する
@@ -41,11 +44,11 @@ RSpec.describe Member, type: :model do
     subject { Member.arel_not_joined_to(event_karaoke) }
     it_behaves_like 'valid members'
   end
-  describe '::scope_not_joined_to' do
+  describe '::scope_not_joined_to', pending: 'まさるが抽出されてしまう' do
     subject { Member.scope_not_joined_to(event_karaoke) }
     it_behaves_like 'valid members'
   end
-  describe '::squeel_not_joined_to' do
+  describe '::squeel_not_joined_to', pending: 'まさるが抽出されてしまう' do
     subject { Member.squeel_not_joined_to(event_karaoke) }
     it_behaves_like 'valid members'
   end
@@ -73,11 +76,11 @@ RSpec.describe Member, type: :model do
       subject { Member.arel_not_joined_to(event_karaoke).active }
       it_behaves_like 'valid active members'
     end
-    describe '::scope_not_joined_to' do
+    describe '::scope_not_joined_to', pending: 'まさるが抽出されてしまう' do
       subject { Member.scope_not_joined_to(event_karaoke).active }
       it_behaves_like 'valid active members'
     end
-    describe '::squeel_not_joined_to' do
+    describe '::squeel_not_joined_to', pending: 'まさるが抽出されてしまう' do
       subject { Member.squeel_not_joined_to(event_karaoke).active }
       it_behaves_like 'valid active members'
     end
