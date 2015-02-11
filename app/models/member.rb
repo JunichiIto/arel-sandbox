@@ -3,9 +3,9 @@ class Member < ActiveRecord::Base
   has_many :groups, through: :group_members
 
   scope :scope_not_joined_to, ->(event) { includes(:groups).references(:groups).where("groups.event_id != ? OR groups.event_id IS NULL", event.id) }
-  scope :squeel_not_joined_to, ->(event) { joins{groups.outer}.where{(groups.event_id != event.id) | (groups.event_id == nil) } }
+  scope :squeel_not_joined_to, ->(event) { joins{groups.outer}.where{ (groups.event_id != event.id) | (groups.event_id == nil) } }
   scope :sql_not_joined_to, ->(event) do
-    condition = <<-SQL
+    where(<<-SQL, event.id)
 NOT EXISTS
     (SELECT * FROM groups b
                 JOIN group_members c
@@ -14,7 +14,6 @@ NOT EXISTS
               WHERE
                 members.id = c.member_id)
     SQL
-    where(condition, event.id)
   end
 
   def self.not_joined_to(event)
