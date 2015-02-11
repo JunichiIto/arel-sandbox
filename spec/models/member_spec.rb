@@ -1,6 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Member, type: :model do
+  # たかし => 焼き肉、Ruby勉強会
+  # まさる => 焼き肉、カラオケ
+  # ひろみ => 焼き肉
+  # さちこ => カラオケ
+  # たくや => カラオケ
+  # たろう => （参加履歴無し）
+  # カラオケに参加してないメンバー => たかし、ひろみ、たろう
   let(:event_yakiniku) {create :event, name: '焼き肉パーティ'}
   let(:group_men) {create :group, name: '男性グループ', event: event_yakiniku}
   let(:member_takashi) {create :member, name: 'たかし'}
@@ -12,7 +19,7 @@ RSpec.describe Member, type: :model do
   let(:group_20s) {create :group, name: '20代グループ', event: event_karaoke}
   let(:member_sachiko) {create :member, name: 'さちこ'}
   let(:group_50s) {create :group, name: '50代グループ', event: event_karaoke}
-  let(:member_yuzo) {create :member, name: 'ゆうぞう'}
+  let(:member_takuya) {create :member, name: 'たくや'}
 
   let(:event_ruby) {create :event, name: 'Ruby勉強会'}
   let(:group_programmer) {create :group, name: 'プログラマグループ', event: event_ruby}
@@ -26,7 +33,7 @@ RSpec.describe Member, type: :model do
     create :group_member, group: group_men, member: member_masaru
     create :group_member, group: group_women, member: member_hiromi
     create :group_member, group: group_20s, member: member_sachiko
-    create :group_member, group: group_50s, member: member_yuzo
+    create :group_member, group: group_50s, member: member_takuya
 
     # たかしとまさるは複数のグループに参加している
     create :group_member, group: group_programmer, member: member_takashi
