@@ -22,7 +22,6 @@ RSpec.describe Member, type: :model do
   end
   shared_examples 'valid members' do
     example do
-      expect(subject.count).to eq 3
       expect(subject).to contain_exactly(member_takashi, member_hiromi, member_taro)
     end
   end
@@ -32,6 +31,10 @@ RSpec.describe Member, type: :model do
   end
   describe '::scope_not_joined_to' do
     subject { Member.scope_not_joined_to(event_karaoke) }
+    it_behaves_like 'valid members'
+  end
+  describe '::squeel_not_joined_to' do
+    subject { Member.squeel_not_joined_to(event_karaoke) }
     it_behaves_like 'valid members'
   end
 end
