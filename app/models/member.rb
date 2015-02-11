@@ -2,6 +2,8 @@ class Member < ActiveRecord::Base
   has_many :group_members
   has_many :groups, through: :group_members
 
+  scope :scope_not_joined_to, ->(event) { includes(:groups).references(:groups).where("groups.event_id != ? OR groups.event_id IS NULL", event.id) }
+
   def self.not_joined_to(event)
     members = Member.arel_table
     groups = Group.arel_table
