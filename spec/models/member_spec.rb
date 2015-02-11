@@ -56,16 +56,16 @@ RSpec.describe Member, type: :model do
 
   # アクティブかどうかも条件に加える
   context 'with active' do
-    # たかしを非アクティブに変更
+    # ひろみを非アクティブに変更
     before do 
-      member_takashi.active = false
-      member_takashi.save!
+      member_hiromi.active = false
+      member_hiromi.save!
     end
 
     # カラオケパーティに参加しておらず、かつアクティブなメンバーのみが抽出されることを期待する
     shared_examples 'valid active members' do
       example do
-        expect(subject).to contain_exactly(member_hiromi, member_taro)
+        expect(subject).to contain_exactly(member_takashi, member_taro)
       end
     end
 
