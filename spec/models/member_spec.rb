@@ -61,6 +61,10 @@ RSpec.describe Member, type: :model do
     subject { Member.arel_no_participation_in(event_karaoke) }
     it_behaves_like 'valid members'
   end
+  describe '::two_queries_no_participation_in' do
+    subject { Member.two_queries_no_participation_in(event_karaoke) }
+    it_behaves_like 'valid members'
+  end
 
   # アクティブかどうかも条件に加える
   context 'with active' do
@@ -89,6 +93,10 @@ RSpec.describe Member, type: :model do
     end
     describe '::arel_no_participation_in' do
       subject { Member.arel_no_participation_in(event_karaoke).active }
+      it_behaves_like 'valid active members'
+    end
+    describe '::two_queries_no_participation_in' do
+      subject { Member.two_queries_no_participation_in(event_karaoke).active }
       it_behaves_like 'valid active members'
     end
   end
