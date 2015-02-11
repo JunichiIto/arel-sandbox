@@ -40,10 +40,6 @@ RSpec.describe Member, type: :model do
     end
   end
 
-  describe '::arel_no_participation_in' do
-    subject { Member.arel_no_participation_in(event_karaoke) }
-    it_behaves_like 'valid members'
-  end
   describe '::active_record_no_participation_in', pending: 'まさるが抽出されてしまう' do
     subject { Member.active_record_no_participation_in(event_karaoke) }
     it_behaves_like 'valid members'
@@ -54,6 +50,10 @@ RSpec.describe Member, type: :model do
   end
   describe '::sql_no_participation_in' do
     subject { Member.sql_no_participation_in(event_karaoke) }
+    it_behaves_like 'valid members'
+  end
+  describe '::arel_no_participation_in' do
+    subject { Member.arel_no_participation_in(event_karaoke) }
     it_behaves_like 'valid members'
   end
 
@@ -72,10 +72,6 @@ RSpec.describe Member, type: :model do
       end
     end
 
-    describe '::arel_no_participation_in' do
-      subject { Member.arel_no_participation_in(event_karaoke).active }
-      it_behaves_like 'valid active members'
-    end
     describe '::active_record_no_participation_in', pending: 'まさるが抽出されてしまう' do
       subject { Member.active_record_no_participation_in(event_karaoke).active }
       it_behaves_like 'valid active members'
@@ -86,6 +82,10 @@ RSpec.describe Member, type: :model do
     end
     describe '::sql_no_participation_in' do
       subject { Member.sql_no_participation_in(event_karaoke).active }
+      it_behaves_like 'valid active members'
+    end
+    describe '::arel_no_participation_in' do
+      subject { Member.arel_no_participation_in(event_karaoke).active }
       it_behaves_like 'valid active members'
     end
   end
