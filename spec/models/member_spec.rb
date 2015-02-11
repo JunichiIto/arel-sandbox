@@ -42,9 +42,7 @@ RSpec.describe Member, type: :model do
 
   # カラオケパーティに参加していないメンバーのみが抽出されることを期待する
   shared_examples 'valid members' do
-    example do
-      expect(subject).to contain_exactly(member_takashi, member_hiromi, member_taro)
-    end
+    it { is_expected.to contain_exactly(member_takashi, member_hiromi, member_taro) }
   end
 
   describe '::active_record_no_participation_in', pending: 'まさるが抽出されてしまう' do
@@ -66,17 +64,15 @@ RSpec.describe Member, type: :model do
 
   # アクティブかどうかも条件に加える
   context 'with active' do
-    # ひろみを非アクティブに変更
-    before do 
+    before do
+      # ひろみを非アクティブに変更
       member_hiromi.active = false
       member_hiromi.save!
     end
 
     # カラオケパーティに参加しておらず、かつアクティブなメンバーのみが抽出されることを期待する
     shared_examples 'valid active members' do
-      example do
-        expect(subject).to contain_exactly(member_takashi, member_taro)
-      end
+      it { is_expected.to contain_exactly(member_takashi, member_taro) }
     end
 
     describe '::active_record_no_participation_in', pending: 'まさるが抽出されてしまう' do
