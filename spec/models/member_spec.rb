@@ -13,9 +13,11 @@ RSpec.describe Member, type: :model do
       member_sachiko = create :member, name: 'さちこ'
       create :group_member, group: group_20s, member: member_sachiko
 
+      member_taro = create :member, name: 'たろう'
+
       members = Member.not_joined_to(event_karaoke)
-      expect(members.count).to eq 1
-      expect(members.first).to eq member_takashi
+      expect(members.count).to eq 2
+      expect(members).to contain_exactly(member_takashi, member_taro)
     end
   end
 end
