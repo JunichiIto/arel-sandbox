@@ -16,6 +16,8 @@ NOT EXISTS
     SQL
   end
 
+  scope :active, ->{ where(active: true) }
+
   def self.not_joined_to(event)
     members = Member.arel_table
     groups = Group.arel_table

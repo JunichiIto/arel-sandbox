@@ -41,4 +41,32 @@ RSpec.describe Member, type: :model do
     subject { Member.sql_not_joined_to(event_karaoke) }
     it_behaves_like 'valid members'
   end
+
+  context 'with active' do
+    before do 
+      member_takashi.active = false
+      member_takashi.save!
+    end
+    shared_examples 'valid active members' do
+      example do
+        expect(subject).to contain_exactly(member_hiromi, member_taro)
+      end
+      describe '::not_joined_to' do
+        subject { Member.not_joined_to(event_karaoke).active }
+        it_behaves_like 'valid active members'
+      end
+      describe '::scope_not_joined_to' do
+        subject { Member.scope_not_joined_to(event_karaoke).active }
+        it_behaves_like 'valid active members'
+      end
+      describe '::squeel_not_joined_to' do
+        subject { Member.squeel_not_joined_to(event_karaoke).active }
+        it_behaves_like 'valid active members'
+      end
+      describe '::sql_not_joined_to' do
+        subject { Member.sql_not_joined_to(event_karaoke).active }
+        it_behaves_like 'valid active members'
+      end
+    end
+  end
 end
