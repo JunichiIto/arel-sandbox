@@ -37,4 +37,8 @@ RSpec.describe Member, type: :model do
     subject { Member.squeel_not_joined_to(event_karaoke) }
     it_behaves_like 'valid members'
   end
+  describe '::sql_not_joined_to' do
+    subject { Member.sql_not_joined_to(event_karaoke) }
+    it_behaves_like 'valid members'
+  end
 end
