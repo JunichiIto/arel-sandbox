@@ -40,20 +40,20 @@ RSpec.describe Member, type: :model do
     end
   end
 
-  describe '::arel_not_joined_to' do
-    subject { Member.arel_not_joined_to(event_karaoke) }
+  describe '::arel_no_participation_in' do
+    subject { Member.arel_no_participation_in(event_karaoke) }
     it_behaves_like 'valid members'
   end
-  describe '::scope_not_joined_to', pending: 'まさるが抽出されてしまう' do
-    subject { Member.scope_not_joined_to(event_karaoke) }
+  describe '::scope_no_participation_in', pending: 'まさるが抽出されてしまう' do
+    subject { Member.scope_no_participation_in(event_karaoke) }
     it_behaves_like 'valid members'
   end
-  describe '::squeel_not_joined_to', pending: 'まさるが抽出されてしまう' do
-    subject { Member.squeel_not_joined_to(event_karaoke) }
+  describe '::squeel_no_participation_in', pending: 'まさるが抽出されてしまう' do
+    subject { Member.squeel_no_participation_in(event_karaoke) }
     it_behaves_like 'valid members'
   end
-  describe '::sql_not_joined_to' do
-    subject { Member.sql_not_joined_to(event_karaoke) }
+  describe '::sql_no_participation_in' do
+    subject { Member.sql_no_participation_in(event_karaoke) }
     it_behaves_like 'valid members'
   end
 
@@ -72,20 +72,20 @@ RSpec.describe Member, type: :model do
       end
     end
 
-    describe '::arel_not_joined_to' do
-      subject { Member.arel_not_joined_to(event_karaoke).active }
+    describe '::arel_no_participation_in' do
+      subject { Member.arel_no_participation_in(event_karaoke).active }
       it_behaves_like 'valid active members'
     end
-    describe '::scope_not_joined_to', pending: 'まさるが抽出されてしまう' do
-      subject { Member.scope_not_joined_to(event_karaoke).active }
+    describe '::scope_no_participation_in', pending: 'まさるが抽出されてしまう' do
+      subject { Member.scope_no_participation_in(event_karaoke).active }
       it_behaves_like 'valid active members'
     end
-    describe '::squeel_not_joined_to', pending: 'まさるが抽出されてしまう' do
-      subject { Member.squeel_not_joined_to(event_karaoke).active }
+    describe '::squeel_no_participation_in', pending: 'まさるが抽出されてしまう' do
+      subject { Member.squeel_no_participation_in(event_karaoke).active }
       it_behaves_like 'valid active members'
     end
-    describe '::sql_not_joined_to' do
-      subject { Member.sql_not_joined_to(event_karaoke).active }
+    describe '::sql_no_participation_in' do
+      subject { Member.sql_no_participation_in(event_karaoke).active }
       it_behaves_like 'valid active members'
     end
   end

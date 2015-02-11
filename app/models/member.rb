@@ -2,9 +2,9 @@ class Member < ActiveRecord::Base
   has_many :group_members
   has_many :groups, through: :group_members
 
-  scope :scope_not_joined_to, ->(event) { includes(:groups).references(:groups).where("groups.event_id != ? OR groups.event_id IS NULL", event.id) }
-  scope :squeel_not_joined_to, ->(event) { joins{groups.outer}.where{ (groups.event_id != event.id) | (groups.event_id == nil) }.uniq }
-  scope :sql_not_joined_to, ->(event) do
+  scope :scope_no_participation_in, ->(event) { includes(:groups).references(:groups).where("groups.event_id != ? OR groups.event_id IS NULL", event.id) }
+  scope :squeel_no_participation_in, ->(event) { joins{groups.outer}.where{ (groups.event_id != event.id) | (groups.event_id == nil) }.uniq }
+  scope :sql_no_participation_in, ->(event) do
     where(<<-SQL, event.id)
 NOT EXISTS
     (SELECT * FROM groups b
@@ -15,7 +15,7 @@ NOT EXISTS
                 members.id = c.member_id)
     SQL
   end
-  scope :arel_not_joined_to, ->(event) do
+  scope :arel_no_participation_in, ->(event) do
     members = Member.arel_table
     groups = Group.arel_table
     group_members = GroupMember.arel_table
