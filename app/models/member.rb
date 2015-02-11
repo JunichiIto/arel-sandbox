@@ -35,7 +35,7 @@ NOT EXISTS
   end
 
   scope :two_queries_no_participation_in, ->(event) do
-    ids_to_exclude = Member.joins(:groups).where(groups: {event_id: event.id})
+    ids_to_exclude = Member.joins(:groups).where(groups: {event_id: event.id}).pluck(:id)
     where.not(id: ids_to_exclude)
   end
 
