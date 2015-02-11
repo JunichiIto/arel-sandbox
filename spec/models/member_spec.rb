@@ -31,8 +31,8 @@ RSpec.describe Member, type: :model do
     end
   end
 
-  describe '::not_joined_to' do
-    subject { Member.not_joined_to(event_karaoke) }
+  describe '::arel_not_joined_to' do
+    subject { Member.arel_not_joined_to(event_karaoke) }
     it_behaves_like 'valid members'
   end
   describe '::scope_not_joined_to' do
@@ -63,8 +63,8 @@ RSpec.describe Member, type: :model do
       end
     end
 
-    describe '::not_joined_to' do
-      subject { Member.not_joined_to(event_karaoke).active }
+    describe '::arel_not_joined_to' do
+      subject { Member.arel_not_joined_to(event_karaoke).active }
       it_behaves_like 'valid active members'
     end
     describe '::scope_not_joined_to' do

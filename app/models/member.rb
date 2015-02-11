@@ -15,10 +15,7 @@ NOT EXISTS
                 members.id = c.member_id)
     SQL
   end
-
-  scope :active, ->{ where(active: true) }
-
-  def self.not_joined_to(event)
+  scope :arel_not_joined_to, ->(event) do
     members = Member.arel_table
     groups = Group.arel_table
     group_members = GroupMember.arel_table
@@ -29,7 +26,8 @@ NOT EXISTS
             .join(group_members)
             .on(groups[:id].eq(group_members[:group_id]), groups[:event_id].eq(event.id))
             .where(members[:id].eq(group_members[:member_id]))
-
-    Member.where(condition.exists.not).all
+    where{condition.exists.not}
   end
+
+  scope :active, ->{ where(active: true) }
 end
