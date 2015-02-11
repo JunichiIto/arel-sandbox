@@ -13,6 +13,9 @@ RSpec.describe Member, type: :model do
   let(:group_50s) {create :group, name: '50代グループ', event: event_karaoke}
   let(:member_yuzo) {create :member, name: 'ゆうぞう'}
 
+  let(:event_ruby) {create :event, name: 'Ruby勉強会'}
+  let(:group_programmer) {create :group, name: 'プログラマグループ', event: event_ruby}
+
   # グループに属さないユーザー
   let!(:member_taro) {create :member, name: 'たろう'}
 
@@ -22,6 +25,9 @@ RSpec.describe Member, type: :model do
     create :group_member, group: group_women, member: member_hiromi
     create :group_member, group: group_20s, member: member_sachiko
     create :group_member, group: group_50s, member: member_yuzo
+
+    # たかしは複数のグループに参加している
+    create :group_member, group: group_programmer, member: member_takashi
   end
 
   # カラオケパーティに参加していないメンバーのみが抽出されることを期待する
