@@ -30,4 +30,8 @@ RSpec.describe Member, type: :model do
     subject { Member.not_joined_to(event_karaoke) }
     it_behaves_like 'valid members'
   end
+  describe '::scope_not_joined_to' do
+    subject { Member.scope_not_joined_to(event_karaoke) }
+    it_behaves_like 'valid members'
+  end
 end
